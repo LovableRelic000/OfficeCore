@@ -16,7 +16,7 @@ android {
         versionCode = 1
         versionName = "1.0.0"
 
-        buildConfigField("String", "BACKEND_URL", "\"http://10.0.0.22:3000\"")
+        buildConfigField("String", "BACKEND_URL", "\"http://10.0.0.34:3000\"")
         buildConfigField("String", "DEMO_TOKEN", "\"officecore_watch_demo_token_2026\"")
     }
 

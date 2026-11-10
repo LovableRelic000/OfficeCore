@@ -2,7 +2,7 @@
  * OfficeCore Mobile API Client & WebSocket Service
  */
 
-export const API_BASE = process.env.EXPO_PUBLIC_API_URL || 'http://10.0.0.22:3000';
+export const API_BASE = process.env.EXPO_PUBLIC_API_URL || 'http://10.0.0.34:3000';
 export const DEMO_TOKEN = process.env.EXPO_PUBLIC_DEMO_TOKEN || 'officecore_phone_demo_token_2026';
 
 async function request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
@@ -135,3 +135,4 @@ class WebSocketClient {
 }
 
 export const wsClient = new WebSocketClient();
+
