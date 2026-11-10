@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Production builds
+dist/
+build/
+.expo/
+*.apk
+*.aab
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+.demo-tokens.json
+backend/.env
+backend/.demo-tokens.json
+pc-agent/config.toml
+watch/local.properties
+
+# Logs and runtime
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+.pytest_cache/
+
+# Android / Gradle
+.gradle/
+watch/build/
+watch/.gradle/
+watch/app/build/
+*.iml
+.idea/
+local.properties
+.DS_Store
+Thumbs.db

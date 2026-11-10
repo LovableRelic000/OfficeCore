@@ -1,0 +1,14 @@
+{
+  "name": "officecore",
+  "version": "1.0.0",
+  "description": "OfficeCore — Smartwatch-Centric Ergonomics & Productivity Companion",
+  "scripts": {
+    "db:init": "npm --prefix backend run db:init",
+    "seed": "npm --prefix backend run seed",
+    "seed:reset": "npm --prefix backend run seed:reset",
+    "seed:verify": "npm --prefix backend run seed:verify",
+    "backend:dev": "npm --prefix backend run dev",
+    "backend:build": "npm --prefix backend run build",
+    "mobile:start": "npm --prefix mobile start"
+  }
+}
