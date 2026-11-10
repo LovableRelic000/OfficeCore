@@ -81,3 +81,4 @@ export async function authMiddleware(req: Request, res: Response, next: NextFunc
     res.status(500).json({ error: 'Internal auth validation error' });
   }
 }
+

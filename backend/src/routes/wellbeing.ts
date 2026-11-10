@@ -111,3 +111,4 @@ wellbeingRouter.get('/environment/day', async (req, res) => {
     samples,
   });
 });
+

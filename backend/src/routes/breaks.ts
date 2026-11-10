@@ -71,3 +71,4 @@ breaksRouter.get('/day', async (req, res) => {
     breaks,
   });
 });
+

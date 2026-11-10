@@ -105,3 +105,4 @@ focusRouter.patch('/sessions/:id', async (req, res) => {
 
   res.json({ success: true, message: 'Focus session completed' });
 });
+

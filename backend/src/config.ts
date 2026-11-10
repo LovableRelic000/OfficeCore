@@ -18,3 +18,4 @@ export const config = {
   },
   timezone: process.env.DEMO_TIMEZONE || 'America/Mexico_City',
 };
+

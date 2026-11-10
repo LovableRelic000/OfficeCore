@@ -118,3 +118,4 @@ export function broadcastFocusState(userId: number, focus: any) {
 export function broadcastCalibrationCommand(userId: number, command: any) {
   broadcastToUser(userId, { type: 'calibration_command', data: command, ts: new Date().toISOString() });
 }
+

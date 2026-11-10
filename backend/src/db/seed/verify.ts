@@ -110,3 +110,4 @@ verifySeed()
     console.error('Seed verification error:', err);
     process.exit(1);
   });
+

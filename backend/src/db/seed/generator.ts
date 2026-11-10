@@ -455,3 +455,4 @@ export async function runSeed() {
 
   console.log('[Seed] Seed completed successfully for Alex Rivera!');
 }
+

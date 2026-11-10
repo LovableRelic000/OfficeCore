@@ -97,3 +97,4 @@ export function calculateEnergy(input: EnergyInputData): EnergyComponents {
     overall: Math.max(10, Math.min(100, overall)),
   };
 }
+

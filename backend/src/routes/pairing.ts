@@ -68,3 +68,4 @@ pairingRouter.post('/claim', async (req, res) => {
     userId: pairing.user_id,
   });
 });
+

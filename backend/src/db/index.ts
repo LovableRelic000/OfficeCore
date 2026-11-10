@@ -28,3 +28,4 @@ export async function execute(sql: string, params: any[] = []): Promise<mysql.Re
   const [result] = await pool.execute(sql, params);
   return result as mysql.ResultSetHeader;
 }
+

@@ -79,3 +79,4 @@ export function analyzeFocusActivity(windows: PcActivityWindow[]): FocusBlockAna
     suggestedAction,
   };
 }
+

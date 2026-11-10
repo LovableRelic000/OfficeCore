@@ -152,3 +152,4 @@ postureRouter.post('/calibration', async (req, res) => {
     message: 'Calibration saved successfully',
   });
 });
+

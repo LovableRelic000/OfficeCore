@@ -9,3 +9,4 @@ runSeed()
     console.error('[Seed] Error during seeding:', err);
     process.exit(1);
   });
+

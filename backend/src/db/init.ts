@@ -34,3 +34,4 @@ if (process.argv[1]?.endsWith('init.ts')) {
       process.exit(1);
     });
 }
+

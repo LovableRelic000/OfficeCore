@@ -71,3 +71,4 @@ energyRouter.get('/day', async (req, res) => {
     snapshots,
   });
 });
+

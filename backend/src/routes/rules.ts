@@ -54,3 +54,4 @@ rulesRouter.put('/:type', async (req, res) => {
 
   res.json({ success: true, message: `Rule ${ruleType} updated` });
 });
+

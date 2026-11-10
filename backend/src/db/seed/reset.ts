@@ -15,3 +15,4 @@ resetSeed()
     console.error('[Seed:Reset] Error resetting seed:', err);
     process.exit(1);
   });
+

@@ -122,3 +122,4 @@ alertsRouter.get('/day', async (req, res) => {
     alerts,
   });
 });
+

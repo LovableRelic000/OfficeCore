@@ -88,3 +88,4 @@ historyRouter.get('/trends', async (req, res) => {
     sleepTrends,
   });
 });
+

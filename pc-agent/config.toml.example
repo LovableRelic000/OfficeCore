@@ -12,3 +12,4 @@ internal_tick_seconds = 10
 # Window titles and keystrokes are NEVER recorded.
 # Only aggregate counts and local process classification are evaluated.
 report_app_category = true
+

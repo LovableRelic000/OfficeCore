@@ -40,3 +40,4 @@ calendarRouter.post('/sync', async (req, res) => {
     eventsSynced: synced,
   });
 });
+

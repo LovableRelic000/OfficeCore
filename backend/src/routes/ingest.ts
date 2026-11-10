@@ -46,7 +46,7 @@ ingestRouter.post('/watch', async (req, res) => {
       await execute(
         `INSERT INTO posture_windows (user_id, ts_start, duration_s, typing, roll_dev, pitch_dev, deviation_deg, band)
          VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-        [userId, pw.ts_start, pw.duration_s, pw.typing, pw.roll_dev, pw.pitch_dev, pw.deviation_deg, pw.band]
+        [userId, new Date(pw.ts_start), pw.duration_s, pw.typing, pw.roll_dev, pw.pitch_dev, pw.deviation_deg, pw.band]
       );
     }
   }
@@ -55,7 +55,7 @@ ingestRouter.post('/watch', async (req, res) => {
     for (const hs of heartSamples) {
       await execute(
         `INSERT INTO heart_samples (user_id, ts, bpm, moving) VALUES (?, ?, ?, ?)`,
-        [userId, hs.ts, hs.bpm, hs.moving]
+        [userId, new Date(hs.ts), hs.bpm, hs.moving]
       );
     }
   }
@@ -64,7 +64,7 @@ ingestRouter.post('/watch', async (req, res) => {
     for (const es of environmentSamples) {
       await execute(
         `INSERT INTO environment_samples (user_id, ts, noise_db, lux) VALUES (?, ?, ?, ?)`,
-        [userId, es.ts, es.noise_db, es.lux]
+        [userId, new Date(es.ts), es.noise_db, es.lux]
       );
     }
   }
@@ -100,7 +100,7 @@ ingestRouter.post('/pc', async (req, res) => {
     await execute(
       `INSERT INTO pc_activity_windows (user_id, ts_start, keystrokes, keystroke_cv, mouse_events, idle_s, app_category)
        VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [userId, aw.ts_start, aw.keystrokes, aw.keystroke_cv, aw.mouse_events, aw.idle_s, aw.app_category]
+      [userId, new Date(aw.ts_start), aw.keystrokes, aw.keystroke_cv, aw.mouse_events, aw.idle_s, aw.app_category]
     );
   }
 
@@ -109,3 +109,4 @@ ingestRouter.post('/pc', async (req, res) => {
     activityCount: activityWindows.length,
   });
 });
+

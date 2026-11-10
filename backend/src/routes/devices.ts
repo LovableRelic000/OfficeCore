@@ -16,3 +16,4 @@ devicesRouter.get('/', async (req, res) => {
 
   res.json({ devices });
 });
+

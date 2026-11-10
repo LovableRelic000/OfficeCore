@@ -132,3 +132,4 @@ caffeineRouter.get('/cutoff', async (req, res) => {
     adjustedForPoorSleep: cutoff.adjustedForSleep,
   });
 });
+
