@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "OfficeCore",
+    "slug": "officecore",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "scheme": "officecore",
+    "splash": {
+      "backgroundColor": "#e0e5ec"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#e0e5ec"
+      },
+      "package": "com.officecore.mobile"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
