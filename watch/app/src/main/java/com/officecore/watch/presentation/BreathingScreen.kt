@@ -32,6 +32,7 @@ fun BreathingScreen(
     val scope = rememberCoroutineScope()
     var bpmRate by remember { mutableStateOf(6) } // 4 to 8 respiraciones por minuto
     var phase by remember { mutableStateOf("Inhala") }
+    var rotaryDelta by remember { mutableFloatStateOf(0f) }
     val focusRequester = remember { FocusRequester() }
 
     // Pulsing circle animation
@@ -66,12 +67,15 @@ fun BreathingScreen(
             .fillMaxSize()
             .background(Surface)
             .onRotaryScrollEvent {
-                if (it.verticalScrollPixels > 0 && bpmRate < 8) {
+                rotaryDelta += it.verticalScrollPixels
+                if (rotaryDelta >= 30f && bpmRate < 8) {
                     bpmRate += 1
                     haptic.playRotaryDetent()
-                } else if (it.verticalScrollPixels < 0 && bpmRate > 4) {
+                    rotaryDelta = 0f
+                } else if (rotaryDelta <= -30f && bpmRate > 4) {
                     bpmRate -= 1
                     haptic.playRotaryDetent()
+                    rotaryDelta = 0f
                 }
                 true
             }

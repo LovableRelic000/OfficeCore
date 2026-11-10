@@ -12,6 +12,8 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Build
+import android.os.Handler
+import android.os.HandlerThread
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
@@ -35,6 +37,9 @@ class SensorService : Service(), SensorEventListener {
         timeZone = TimeZone.getTimeZone("UTC")
     }
 
+    private var sensorThread: HandlerThread? = null
+    private var sensorHandler: Handler? = null
+
     override fun onCreate() {
         super.onCreate()
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
@@ -56,9 +61,21 @@ class SensorService : Service(), SensorEventListener {
     }
 
     private fun registerSensors() {
+        val thread = HandlerThread("WatchSensorThread").apply { start() }
+        sensorThread = thread
+        val handler = Handler(thread.looper)
+        sensorHandler = handler
+
         sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)?.let {
-            sensorManager.registerListener(this, it, 40000, 2000000) // ~25 Hz with 2s batching
+            sensorManager.registerListener(this, it, 100000, 5000000, handler) // 10 Hz with 5s batching on background thread
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        sensorManager.unregisterListener(this)
+        sensorThread?.quitSafely()
+        serviceScope.cancel()
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
@@ -120,12 +137,6 @@ class SensorService : Service(), SensorEventListener {
             .setSmallIcon(android.R.drawable.ic_dialog_info)
             .setOngoing(true)
             .build()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        sensorManager.unregisterListener(this)
-        serviceScope.cancel()
     }
 
     override fun onBind(intent: Intent?): IBinder? = null

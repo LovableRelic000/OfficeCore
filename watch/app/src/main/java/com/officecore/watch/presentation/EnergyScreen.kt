@@ -30,6 +30,7 @@ fun EnergyScreen(
 ) {
     var energy by remember { mutableStateOf(EnergyResponse()) }
     var focusedRing by remember { mutableStateOf(0) } // 0: Physical, 1: Mental, 2: Caffeine
+    var rotaryDelta by remember { mutableFloatStateOf(0f) }
     val focusRequester = remember { FocusRequester() }
 
     LaunchedEffect(Unit) {
@@ -42,10 +43,13 @@ fun EnergyScreen(
             .fillMaxSize()
             .background(Surface)
             .onRotaryScrollEvent {
-                if (it.verticalScrollPixels > 0) {
+                rotaryDelta += it.verticalScrollPixels
+                if (rotaryDelta >= 28f) {
                     focusedRing = (focusedRing + 1) % 3
-                } else if (it.verticalScrollPixels < 0) {
+                    rotaryDelta = 0f
+                } else if (rotaryDelta <= -28f) {
                     focusedRing = (focusedRing + 2) % 3
+                    rotaryDelta = 0f
                 }
                 true
             }

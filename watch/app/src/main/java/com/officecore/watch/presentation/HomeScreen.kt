@@ -34,9 +34,7 @@ fun HomeScreen(
             .fillMaxSize()
             .background(Surface)
             .onRotaryScrollEvent {
-                coroutineScope.launch {
-                    listState.scrollBy(it.verticalScrollPixels)
-                }
+                listState.dispatchRawDelta(it.verticalScrollPixels)
                 true
             }
             .focusRequester(focusRequester)

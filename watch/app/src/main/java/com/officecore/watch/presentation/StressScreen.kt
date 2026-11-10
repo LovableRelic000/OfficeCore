@@ -30,6 +30,7 @@ fun StressScreen(
     val scope = rememberCoroutineScope()
     var selectedIdx by remember { mutableStateOf(0) }
     var confirmed by remember { mutableStateOf(false) }
+    var rotaryDelta by remember { mutableFloatStateOf(0f) }
     val focusRequester = remember { FocusRequester() }
 
     val trigger = STRESS_TRIGGERS[selectedIdx]
@@ -44,12 +45,15 @@ fun StressScreen(
             .fillMaxSize()
             .background(Surface)
             .onRotaryScrollEvent {
-                if (it.verticalScrollPixels > 0) {
+                rotaryDelta += it.verticalScrollPixels
+                if (rotaryDelta >= 28f) {
                     selectedIdx = (selectedIdx + 1) % STRESS_TRIGGERS.size
                     haptic.playRotaryDetent()
-                } else if (it.verticalScrollPixels < 0) {
+                    rotaryDelta = 0f
+                } else if (rotaryDelta <= -28f) {
                     selectedIdx = (selectedIdx - 1 + STRESS_TRIGGERS.size) % STRESS_TRIGGERS.size
                     haptic.playRotaryDetent()
+                    rotaryDelta = 0f
                 }
                 true
             }

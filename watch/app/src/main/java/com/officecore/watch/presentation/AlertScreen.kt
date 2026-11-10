@@ -33,6 +33,7 @@ fun AlertScreen(
     val haptic = remember { HapticController(context) }
     val scope = rememberCoroutineScope()
     var snoozeIdx by remember { mutableStateOf(0) }
+    var rotaryDelta by remember { mutableFloatStateOf(0f) }
     val focusRequester = remember { FocusRequester() }
 
     LaunchedEffect(Unit) {
@@ -45,12 +46,15 @@ fun AlertScreen(
             .fillMaxSize()
             .background(Surface)
             .onRotaryScrollEvent {
-                if (it.verticalScrollPixels > 0) {
+                rotaryDelta += it.verticalScrollPixels
+                if (rotaryDelta >= 28f) {
                     snoozeIdx = (snoozeIdx + 1) % SNOOZE_OPTIONS.size
                     haptic.playRotaryDetent()
-                } else if (it.verticalScrollPixels < 0) {
+                    rotaryDelta = 0f
+                } else if (rotaryDelta <= -28f) {
                     snoozeIdx = (snoozeIdx - 1 + SNOOZE_OPTIONS.size) % SNOOZE_OPTIONS.size
                     haptic.playRotaryDetent()
+                    rotaryDelta = 0f
                 }
                 true
             }

@@ -28,6 +28,7 @@ fun WaterScreen(
     val scope = rememberCoroutineScope()
     var amountMl by remember { mutableStateOf(250) }
     var confirmed by remember { mutableStateOf(false) }
+    var rotaryDelta by remember { mutableFloatStateOf(0f) }
     val focusRequester = remember { FocusRequester() }
 
     LaunchedEffect(Unit) {
@@ -39,12 +40,15 @@ fun WaterScreen(
             .fillMaxSize()
             .background(Surface)
             .onRotaryScrollEvent {
-                if (it.verticalScrollPixels > 0 && amountMl < 1000) {
+                rotaryDelta += it.verticalScrollPixels
+                if (rotaryDelta >= 28f && amountMl < 1000) {
                     amountMl += 50
                     haptic.playRotaryDetent()
-                } else if (it.verticalScrollPixels < 0 && amountMl > 50) {
+                    rotaryDelta = 0f
+                } else if (rotaryDelta <= -28f && amountMl > 50) {
                     amountMl -= 50
                     haptic.playRotaryDetent()
+                    rotaryDelta = 0f
                 }
                 true
             }

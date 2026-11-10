@@ -28,6 +28,7 @@ fun FocusScreen(
     var durationMin by remember { mutableStateOf(25) }
     var isRunning by remember { mutableStateOf(false) }
     var secondsLeft by remember { mutableStateOf(25 * 60) }
+    var rotaryDelta by remember { mutableFloatStateOf(0f) }
     val focusRequester = remember { FocusRequester() }
 
     LaunchedEffect(Unit) {
@@ -50,14 +51,17 @@ fun FocusScreen(
             .background(Surface)
             .onRotaryScrollEvent {
                 if (!isRunning) {
-                    if (it.verticalScrollPixels > 0 && durationMin < 120) {
+                    rotaryDelta += it.verticalScrollPixels
+                    if (rotaryDelta >= 30f && durationMin < 120) {
                         durationMin += 5
                         secondsLeft = durationMin * 60
                         haptic.playRotaryDetent()
-                    } else if (it.verticalScrollPixels < 0 && durationMin > 15) {
+                        rotaryDelta = 0f
+                    } else if (rotaryDelta <= -30f && durationMin > 15) {
                         durationMin -= 5
                         secondsLeft = durationMin * 60
                         haptic.playRotaryDetent()
+                        rotaryDelta = 0f
                     }
                 }
                 true
