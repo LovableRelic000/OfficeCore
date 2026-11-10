@@ -1,0 +1,14 @@
+# OfficeCore PC Companion Agent Configuration
+
+backend_url = "http://127.0.0.1:3000"
+token = "officecore_pc_demo_token_2026"
+device_name = "Laptop Dev Windows 11"
+
+[sampling]
+window_duration_seconds = 60
+internal_tick_seconds = 10
+
+[privacy]
+# Window titles and keystrokes are NEVER recorded.
+# Only aggregate counts and local process classification are evaluated.
+report_app_category = true
