@@ -41,7 +41,7 @@ export default function DashboardScreen() {
     <ScrollView
       style={styles.container}
       contentContainerStyle={styles.content}
-      refreshControl={<RefreshControl refreshing={isLoading || isRefetching} onRefresh={refetch} />}
+      refreshControl={<RefreshControl refreshing={isLoading || isRefetching} onRefresh={() => { refetch(); }} />}
     >
       {/* Device Status Bar */}
       <View style={styles.deviceRow}>

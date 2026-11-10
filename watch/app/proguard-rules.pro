@@ -5,3 +5,4 @@
     @androidx.compose.runtime.Composable *;
 }
 -keep class com.officecore.watch.data.api.** { *; }
+
