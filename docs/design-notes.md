@@ -19,3 +19,4 @@
    - En Wear OS no hay drop-shadow nativo multi-capa idéntico a CSS `box-shadow` múltiple; se adapta utilizando canvas draws y degradados de elevación simulando la luz difusa superior izquierda y sombra inferior derecha sin cambiar la paleta de colores `#e0e5ec`, `#d1d9e6` y acento `#9b72cf`.
 3. **Modo Ambiente / Always-On Display:**
    - En reposo ambiental se conserva el trazo del anillo de energía simplificado para minimizar consumo de batería AMOLED.
+

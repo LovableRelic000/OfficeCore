@@ -24,3 +24,4 @@
 ## 3. Descanso Visual y Cargas Mentales
 - **Regla 20-20-20:** Cada 20 minutos de pantalla, mirar a 20 pies (6 metros) durante 20 segundos para relajar el músculo ciliar y prevenir la astenopía acomodativa.
 - **Ritmos de respiración coherente:** 5.5 a 6 respiraciones por minuto (inhalar 4–5 s, exhalar 5–6 s) activan el tono vagal parasimpático, reduciendo el pulso tras picos de estrés laboral.
+

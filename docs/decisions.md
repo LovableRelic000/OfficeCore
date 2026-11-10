@@ -21,3 +21,4 @@
 ### D-005: Privacidad Estricta en el Agente de PC
 - **Contexto:** Salud ocupacional sin vigilancia invasiva.
 - **Decisión:** El agente no almacena pulsaciones de teclas concretas ni títulos de ventanas; categoriza aplicaciones activas localmente a nivel de proceso (`editor`, `terminal`, `browser`, `meeting`, `chat`, `other`) y solo reporta conteos y cadencia agregada.
+

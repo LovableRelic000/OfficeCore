@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">OfficeCore</string>
+    <string name="tile_name">OfficeCore Energía</string>
+    <string name="complication_name">Energía OfficeCore</string>
+    <string name="notification_channel_name">Servicio de Bienestar OfficeCore</string>
+    <string name="notification_channel_desc">Monitorea postura, energía y bienestar durante tu jornada</string>
+    <string name="notification_title">OfficeCore Activo</string>
+    <string name="notification_text">Monitoreo de postura y descansos en curso</string>
+</resources>
+

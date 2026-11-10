@@ -20,3 +20,4 @@ Referencia técnica para la integración de hardware Wear OS en OfficeCore.
    - Privacidad: Sin grabación persistente de audio ni compresión de voz; descarte inmediato de buffers.
 6. **Bisel Rotatorio (Rotary Input):**
    - Mapeado mediante `Modifier.rotaryScrollable` o `RotaryScrollEvent` para ajuste analógico de temporizadores de foco, cafeína, agua y navegación de lista.
+
