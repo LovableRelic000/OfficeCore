@@ -91,7 +91,7 @@ export default function DashboardScreen() {
 
       {/* Module Overview Cards Grid */}
       <Text style={styles.gridHeading}>Módulos Clave</Text>
-      <View style={styles.grid}>
+      <View style={styles.gridRow}>
         {/* Postura */}
         <NeuCard style={styles.moduleCard} onPress={() => router.push('/(tabs)/posture')}>
           <View style={styles.moduleHeader}>
@@ -117,7 +117,9 @@ export default function DashboardScreen() {
             <View style={[styles.miniBarFill, { width: '75%', backgroundColor: Colors.accent }]} />
           </View>
         </NeuCard>
+      </View>
 
+      <View style={styles.gridRow}>
         {/* Cafeína */}
         <NeuCard style={styles.moduleCard} onPress={() => router.push('/(tabs)/caffeine')}>
           <View style={styles.moduleHeader}>
@@ -146,7 +148,7 @@ export default function DashboardScreen() {
       </View>
 
       {/* AI Assistant Quick Card */}
-      <NeuCard style={styles.aiCard} onPress={() => router.push('/(tabs)/assistant')}>
+      <NeuCard style={styles.aiCard}>
         <View style={styles.aiHeader}>
           <Sparkles size={20} color={Colors.accent} strokeWidth={2} />
           <Text style={styles.aiTitle}>Sugerencia del Asistente</Text>
@@ -154,9 +156,11 @@ export default function DashboardScreen() {
         <Text style={styles.aiBody}>
           Tu postura se mantuvo neutral el 88% del tiempo en la mañana. Recuerda espaciar tu próximo café antes de las {energy?.cutoffTime || '15:30'} para proteger tu sueño.
         </Text>
-        <NeuButton style={styles.aiBtn} onPress={() => router.push('/(tabs)/assistant')}>
-          Abrir Asistente
-        </NeuButton>
+        <View style={styles.aiBtnContainer}>
+          <NeuButton style={styles.aiBtn} onPress={() => router.push('/(tabs)/assistant')}>
+            Abrir Asistente
+          </NeuButton>
+        </View>
       </NeuCard>
     </ScrollView>
   );
@@ -237,14 +241,13 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.sm,
     letterSpacing: -0.2,
   },
-  grid: {
+  gridRow: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
     gap: Spacing.md,
-    marginBottom: Spacing.lg,
+    marginBottom: Spacing.md,
   },
   moduleCard: {
-    width: '47%',
+    flex: 1,
     padding: Spacing.md,
   },
   moduleHeader: {
@@ -282,6 +285,7 @@ const styles = StyleSheet.create({
   },
   aiCard: {
     padding: Spacing.md,
+    marginTop: Spacing.xs,
   },
   aiHeader: {
     flexDirection: 'row',
@@ -300,10 +304,17 @@ const styles = StyleSheet.create({
     color: Colors.textSecondary,
     marginBottom: Spacing.md,
   },
+  aiBtnContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    paddingVertical: 2,
+  },
   aiBtn: {
-    alignSelf: 'flex-start',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
+    alignSelf: 'center',
+    minWidth: 180,
+    paddingVertical: 10,
+    paddingHorizontal: 24,
   },
 });
 

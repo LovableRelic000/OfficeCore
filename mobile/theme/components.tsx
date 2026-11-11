@@ -12,6 +12,29 @@ import {
 import Svg, { Circle, G } from 'react-native-svg';
 import { Colors, Radii, Spacing } from './tokens';
 
+const LAYOUT_STYLE_KEYS = new Set([
+  'margin', 'marginHorizontal', 'marginVertical', 'marginTop', 'marginBottom', 'marginLeft', 'marginRight',
+  'flex', 'flexGrow', 'flexShrink', 'flexBasis',
+  'width', 'minWidth', 'maxWidth', 'height', 'minHeight', 'maxHeight',
+  'alignSelf', 'zIndex', 'position', 'top', 'bottom', 'left', 'right'
+]);
+
+function splitStyles(style?: StyleProp<ViewStyle>) {
+  if (!style) return { outerStyle: undefined, innerStyle: undefined };
+  const flat = StyleSheet.flatten(style) || {};
+  const outerStyle: ViewStyle = {};
+  const innerStyle: ViewStyle = {};
+
+  for (const [key, value] of Object.entries(flat)) {
+    if (LAYOUT_STYLE_KEYS.has(key)) {
+      (outerStyle as any)[key] = value;
+    } else {
+      (innerStyle as any)[key] = value;
+    }
+  }
+  return { outerStyle, innerStyle };
+}
+
 interface NeuCardProps {
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
@@ -20,10 +43,12 @@ interface NeuCardProps {
 }
 
 export function NeuCard({ children, style, padding = Spacing.md, onPress }: NeuCardProps) {
-  const content = (
+  const { outerStyle, innerStyle } = splitStyles(style);
+
+  const cardBody = (
     <View style={[styles.cardShadowLight, { borderRadius: Radii.lg }]}>
       <View style={[styles.cardShadowDark, { borderRadius: Radii.lg }]}>
-        <View style={[styles.cardInner, { padding, borderRadius: Radii.lg }, style]}>
+        <View style={[styles.cardInner, { padding, borderRadius: Radii.lg }, innerStyle]}>
           {children}
         </View>
       </View>
@@ -32,12 +57,12 @@ export function NeuCard({ children, style, padding = Spacing.md, onPress }: NeuC
 
   if (onPress) {
     return (
-      <TouchableOpacity activeOpacity={0.88} onPress={onPress}>
-        {content}
+      <TouchableOpacity activeOpacity={0.88} onPress={onPress} style={outerStyle}>
+        {cardBody}
       </TouchableOpacity>
     );
   }
-  return content;
+  return <View style={outerStyle}>{cardBody}</View>;
 }
 
 interface NeuButtonProps {
@@ -51,17 +76,19 @@ interface NeuButtonProps {
 export function NeuButton({ children, onPress, style, textStyle, active = false }: NeuButtonProps) {
   const [pressed, setPressed] = useState(false);
   const isInset = active || pressed;
+  const { outerStyle, innerStyle } = splitStyles(style);
 
   return (
     <TouchableOpacity
-      activeOpacity={0.9}
+      activeOpacity={0.88}
       onPressIn={() => setPressed(true)}
       onPressOut={() => setPressed(false)}
       onPress={onPress}
+      style={outerStyle}
     >
       <View style={[isInset ? styles.btnInset : styles.btnShadowLight, { borderRadius: Radii.md }]}>
         <View style={[isInset ? null : styles.btnShadowDark, { borderRadius: Radii.md }]}>
-          <View style={[styles.btnInner, isInset && styles.btnInnerPressed, style]}>
+          <View style={[styles.btnInner, isInset && styles.btnInnerPressed, innerStyle]}>
             {typeof children === 'string' ? (
               <Text style={[styles.btnText, isInset && styles.btnTextActive, textStyle]}>
                 {children}
@@ -252,36 +279,46 @@ export function NeuProgressRing({
 
 const styles = StyleSheet.create({
   cardShadowLight: {
+    backgroundColor: Colors.surface,
     shadowColor: Colors.shadowLight,
-    shadowOffset: { width: -5, height: -5 },
-    shadowOpacity: 0.85,
-    shadowRadius: 8,
+    shadowOffset: { width: -4, height: -4 },
+    shadowOpacity: 0.9,
+    shadowRadius: 6,
+    width: '100%',
   },
   cardShadowDark: {
+    backgroundColor: Colors.surface,
     shadowColor: Colors.shadowDark,
-    shadowOffset: { width: 5, height: 5 },
-    shadowOpacity: 0.6,
-    shadowRadius: 10,
-    elevation: 4,
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 0.45,
+    shadowRadius: 7,
+    elevation: 3,
+    width: '100%',
   },
   cardInner: {
     backgroundColor: Colors.surface,
+    width: '100%',
   },
   btnShadowLight: {
+    backgroundColor: Colors.surface,
     shadowColor: Colors.shadowLight,
     shadowOffset: { width: -3, height: -3 },
     shadowOpacity: 0.85,
     shadowRadius: 5,
+    width: '100%',
   },
   btnShadowDark: {
+    backgroundColor: Colors.surface,
     shadowColor: Colors.shadowDark,
     shadowOffset: { width: 3, height: 3 },
-    shadowOpacity: 0.5,
-    shadowRadius: 6,
-    elevation: 3,
+    shadowOpacity: 0.4,
+    shadowRadius: 5,
+    elevation: 2,
+    width: '100%',
   },
   btnInset: {
     backgroundColor: Colors.surfaceDeep,
+    width: '100%',
   },
   btnInner: {
     backgroundColor: Colors.surface,
@@ -290,6 +327,7 @@ const styles = StyleSheet.create({
     borderRadius: Radii.md,
     alignItems: 'center',
     justifyContent: 'center',
+    width: '100%',
   },
   btnInnerPressed: {
     backgroundColor: Colors.surfaceDeep,
